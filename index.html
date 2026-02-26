@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Islamic Digital Clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="clock-container">
+            <div id="clock"></div>
+            <div id="date"></div>
+            <div id="hijri-date"></div>
+            <div id="greeting"></div>
+        </div>
+        <div class="controls">
+            <label>
+                <input type="checkbox" id="toggle-12-24"> 12/24 Hour Format
+            </label>
+            <label>
+                <input type="checkbox" id="toggle-gregorian"> Show Gregorian Date
+            </label>
+            <label>
+                <input type="checkbox" id="toggle-hijri"> Show Hijri Date
+            </label>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

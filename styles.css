@@ -1,0 +1,39 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.clock-container {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#clock {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+#date, #hijri-date, #greeting {
+    font-size: 1.5rem;
+    margin: 5px 0;
+}
+
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.controls label {
+    display: block;
+    margin: 5px 0;
+    font-size: 1rem;
+}
