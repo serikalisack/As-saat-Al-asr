@@ -1,39 +1,26 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-    color: #fff;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.clock-container {
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.5);
+    background: #ffffff;
+    color: #000000;
+    transition: 0.3s;
 }
 
-#clock {
+body.dark {
+    background: #0d1b2a;
+    color: #ffffff;
+}
+
+.clock-container h1 {
     font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-#date, #hijri-date, #greeting {
-    font-size: 1.5rem;
-    margin: 5px 0;
 }
 
 .controls {
     margin-top: 20px;
-    text-align: center;
 }
 
-.controls label {
-    display: block;
-    margin: 5px 0;
-    font-size: 1rem;
+.prayer-times {
+    margin-top: 30px;
+    font-size: 1.1rem;
 }
