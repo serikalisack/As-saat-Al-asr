@@ -29,7 +29,10 @@ verseOfDay: document.getElementById("verse-of-day"),
 hadithOfDay: document.getElementById("hadith-of-day"),
 calculationMethod: document.getElementById("calculation-method"),
 madhab: document.getElementById("madhab"),
-nextPrayer: document.getElementById("next-prayer")
+nextPrayer: document.getElementById("next-prayer"),
+compassRose: document.getElementById("compass-rose"),
+deviceHeading: document.getElementById("device-heading"),
+compassStatus: document.getElementById("compass-status")
 };
 
 let state = loadPrefs();
@@ -96,20 +99,159 @@ return θ;
 }
 
 function initQiblaCompass(qiblaBearing, el){
+// Add compass rose with degree markings
+if(el.compassRose) {
+el.compassRose.innerHTML = `
+<div class="compass-degree n">N</div>
+<div class="compass-degree ne">45°</div>
+<div class="compass-degree e">E</div>
+<div class="compass-degree se">135°</div>
+<div class="compass-degree s">S</div>
+<div class="compass-degree sw">225°</div>
+<div class="compass-degree w">W</div>
+<div class="compass-degree nw">315°</div>
+`;
+}
 
-if(window.DeviceOrientationEvent){
-window.addEventListener("deviceorientationabsolute", e=>{
-if(e.alpha !== null){
-let heading = e.alpha;
-let rotation = qiblaBearing - heading;
-el.needle.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+// Initialize compass state
+window.qiblaState = {
+qiblaBearing: qiblaBearing,
+currentHeading: 0,
+lastHeading: 0,
+isSupported: false
+};
+
+// Check for device orientation support
+if(window.DeviceOrientationEvent) {
+// Check if we need to request permission (iOS 13+)
+if(typeof DeviceOrientationEvent.requestPermission === 'function') {
+// Create a button to request permission
+const permissionBtn = document.createElement('button');
+permissionBtn.textContent = 'Enable Compass';
+permissionBtn.style.cssText = `
+background: var(--primary-color);
+color: white;
+border: none;
+padding: 0.75rem 1.5rem;
+border-radius: 8px;
+font-weight: 600;
+cursor: pointer;
+margin: 1rem auto;
+display: block;
+`;
+
+permissionBtn.addEventListener('click', async () => {
+try {
+const permission = await DeviceOrientationEvent.requestPermission();
+if(permission === 'granted') {
+startCompassTracking(el);
+permissionBtn.remove();
+}
+} catch (error) {
+console.error('Error requesting device orientation permission:', error);
+updateCompassStatus(el, 'Permission denied', 'error');
 }
 });
+
+// Insert button before compass
+const compassContainer = document.getElementById('compass-container');
+if(compassContainer) {
+compassContainer.insertBefore(permissionBtn, compassContainer.firstChild);
+}
+} else {
+// No permission needed, start tracking
+startCompassTracking(el);
+}
+} else {
+updateCompassStatus(el, 'Device orientation not supported', 'error');
 }
 
+// Update Qibla angle display
 if(el.qiblaAngle) {
-el.qiblaAngle.textContent = `Qibla Direction: ${qiblaBearing.toFixed(1)}°`;
+el.qiblaAngle.textContent = `Qibla Direction: ${qiblaBearing.toFixed(1)}° ${getCardinalDirection(qiblaBearing)}`;
 }
+}
+
+function startCompassTracking(el) {
+window.qiblaState.isSupported = true;
+updateCompassStatus(el, 'Compass active', 'success');
+
+// Use deviceorientationabsolute for better accuracy
+window.addEventListener("deviceorientationabsolute", handleOrientation);
+
+// Fallback to regular deviceorientation
+window.addEventListener("deviceorientation", handleOrientation);
+}
+
+function handleOrientation(event) {
+const state = window.qiblaState;
+if(!state) return;
+
+let heading = event.alpha; // 0-360 degrees
+
+if(event.webkitCompassHeading) {
+// iOS provides webkitCompassHeading
+heading = event.webkitCompassHeading;
+} else if(heading !== null) {
+// Android provides alpha, but it might need adjustment
+// Convert from 0-360 where 0 = North to compass bearing
+heading = 360 - heading;
+}
+
+if(heading !== null && heading !== undefined) {
+// Smooth the heading changes to reduce jitter
+const smoothedHeading = smoothHeading(heading, state.lastHeading);
+state.currentHeading = smoothedHeading;
+state.lastHeading = smoothedHeading;
+
+updateCompassNeedle(state.qiblaBearing, smoothedHeading);
+updateCompassInfo(smoothedHeading);
+}
+}
+
+function smoothHeading(current, last) {
+const diff = current - last;
+
+// Handle wrap-around at 0/360
+if(diff > 180) {
+return last + (diff - 360) * 0.3;
+} else if(diff < -180) {
+return last + (diff + 360) * 0.3;
+}
+
+return last + diff * 0.3; // Smooth with 30% smoothing factor
+}
+
+function updateCompassNeedle(qiblaBearing, deviceHeading) {
+const needle = document.getElementById('needle');
+if(!needle) return;
+
+// Calculate the angle to rotate the needle
+// The needle should point to Qibla relative to current device orientation
+const rotation = qiblaBearing - deviceHeading;
+needle.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+}
+
+function updateCompassInfo(heading) {
+const deviceHeadingEl = document.getElementById('device-heading');
+if(deviceHeadingEl) {
+deviceHeadingEl.textContent = `Current Heading: ${heading.toFixed(1)}° ${getCardinalDirection(heading)}`;
+}
+}
+
+function updateCompassStatus(el, message, type = 'info') {
+if(el.compassStatus) {
+el.compassStatus.textContent = message;
+el.compassStatus.style.color = type === 'error' ? 'var(--accent-color)' : 
+type === 'success' ? 'var(--secondary-color)' : 'var(--primary-color)';
+}
+}
+
+function getCardinalDirection(degrees) {
+const normalized = ((degrees % 360) + 360) % 360;
+const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+const index = Math.round(normalized / 45) % 8;
+return directions[index];
 }
 
 /* LOCATION */
