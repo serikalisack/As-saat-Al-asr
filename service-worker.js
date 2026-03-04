@@ -1,23 +1,67 @@
-const CACHE_NAME = "islamic-clock-cache-v1";
-
-const FILES_TO_CACHE = [
-    "/",
-    "/index.html",
-    "/styles.css",
-    "/script.js",
-    "/manifest.json"
+const CACHE = "islamic-smart-v2";
+const FILES = [
+  "/",
+  "/index.html", 
+  "/styles.css",
+  "/script.js",
+  "/manifest.json",
+  "/adhan.mp3"
 ];
 
-self.addEventListener("install", event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
-    );
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(FILES))
+      .then(() => self.skipWaiting())
+  );
 });
 
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE) {
+            return caches.delete(cache);
+          }
         })
-    );
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", e => {
+  e.respondWith(
+    caches.match(e.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        
+        if (e.request.url.includes('api.aladhan.com')) {
+          return fetch(e.request).then(response => {
+            if (response.ok) {
+              const responseClone = response.clone();
+              caches.open(CACHE).then(cache => {
+                cache.put(e.request, responseClone);
+              });
+            }
+            return response;
+          }).catch(() => {
+            return new Response('{"error": "Offline - prayer times unavailable"}', {
+              status: 503,
+              headers: { 'Content-Type': 'application/json' }
+            });
+          });
+        }
+        
+        return fetch(e.request);
+      })
+  );
+});
+
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

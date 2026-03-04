@@ -1,65 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d1b2a" id="theme-color-meta">
-    <title>Islamic Digital Clock</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1e40af" id="theme-meta">
+<meta name="description" content="Islamic Smart Clock - Prayer times, Qibla compass, Hijri calendar, and daily Quran verses">
+<meta name="keywords" content="Islamic, prayer times, Qibla, Hijri calendar, Quran, Muslim">
+<meta name="author" content="Islamic Smart Clock">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Islamic Clock">
+<meta name="application-name" content="Islamic Clock">
+<meta name="msapplication-TileColor" content="#1e40af">
+<meta name="msapplication-config" content="browserconfig.xml">
+<title>Islamic Smart Clock</title>
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
 </head>
+
 <body>
-    <main id="app">
-        <section class="clock-container">
-            <h1 id="clock"></h1>
-            <p id="date"></p>
-            <p id="hijri-date"></p>
-            <p id="greeting"></p>
-        </section>
+<main>
 
-        <section id="prayer-times" class="prayer-times"></section>
+<h1 id="clock"></h1>
+<p id="date"></p>
+<p id="hijri-date"></p>
+<p id="greeting"></p>
 
-        <section class="controls">
-            <label>
-                <input type="checkbox" id="toggle-12-24">
-                24 Hour Format
-            </label>
+<section>
+<h3>Islamic Inspiration</h3>
+<div id="islamic-content">
+<p id="verse-of-day" style="font-style: italic; margin: 1rem 0; line-height: 1.8;"></p>
+<p id="hadith-of-day" style="font-style: italic; margin: 1rem 0; line-height: 1.8; color: var(--text-secondary);"></p>
+</div>
+</section>
 
-            <label>
-                <input type="checkbox" id="toggle-gregorian" checked>
-                Show Gregorian Date
-            </label>
+<section>
+<h3>Prayer Settings</h3>
+<div class="settings-grid">
+<div>
+<label for="calculation-method">Calculation Method:</label>
+<select id="calculation-method">
+<option value="2">Muslim World League</option>
+<option value="3">Egyptian General Authority</option>
+<option value="5">Umm Al-Qura University, Makkah</option>
+<option value="7">Institute of Geophysics, University of Tehran</option>
+<option value="8">Gulf Region</option>
+<option value="9">Kuwait</option>
+<option value="10">Qatar</option>
+<option value="11">Majlis Ugama Islam Singapura</option>
+<option value="12">Union Organization Islamic de France</option>
+<option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
+<option value="14">Spiritual Administration of Muslims of Russia</option>
+</select>
+</div>
+<div>
+<label for="madhab">Jurisprudence (Madhab):</label>
+<select id="madhab">
+<option value="0">Shafi'i (default)</option>
+<option value="1">Hanafi</option>
+</select>
+</div>
+</div>
+</section>
 
-            <label>
-                <input type="checkbox" id="toggle-hijri" checked>
-                Show Hijri Date
-            </label>
+<section>
+<h3>Prayer Times</h3>
+<div id="prayer-times"></div>
+<div id="next-prayer" style="margin-top: 1rem; font-weight: 600; color: var(--primary-color);"></div>
+</section>
 
-            <label>
-                <input type="checkbox" id="toggle-theme">
-                Dark Mode
-            </label>
-        </section>
+<section>
+<h3>Display Settings</h3>
+<div class="settings-grid">
+<label><input type="checkbox" id="toggle-12-24"> 24 Hour Format</label>
+<label><input type="checkbox" id="toggle-gregorian" checked> Gregorian Calendar</label>
+<label><input type="checkbox" id="toggle-hijri" checked> Hijri Calendar</label>
+<label><input type="checkbox" id="toggle-theme"> Dark Mode</label>
+<label><input type="checkbox" id="toggle-adhan" checked> Adhan Notifications</label>
+</div>
+</section>
 
-        <section class="adhan-control">
-    <label>
-        <input type="checkbox" id="toggle-adhan">
-        Enable Adhan Notification
-    </label>
+<section>
+<h3>Location Settings</h3>
+<select id="city-select">
+<option value="">Auto Detect Location</option>
+<option value="Dar es Salaam">Dar es Salaam</option>
+<option value="Dodoma">Dodoma</option>
+<option value="Arusha">Arusha</option>
+<option value="Mwanza">Mwanza</option>
+<option value="Zanzibar">Zanzibar</option>
+<option value="Mbeya">Mbeya</option>
+<option value="Morogoro">Morogoro</option>
+</select>
+</section>
+
+<section>
+<h3>Qibla Direction</h3>
+<div id="compass">
+<div id="needle"></div>
+<div class="compass-label">Qibla</div>
+</div>
+<p id="qibla-angle" style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;"></p>
+</section>
+
+<section>
+<h3>Monthly Timetable</h3>
+<div id="monthly-table"></div>
 </section>
 
 <audio id="adhan-audio" src="adhan.mp3" preload="auto"></audio>
 
-<section class="qibla-section">
-    <h3>Qibla Direction</h3>
-    <div id="compass">
-        <div id="needle"></div>
-    </div>
-</section>
-    </main>
+</main>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
