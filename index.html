@@ -26,7 +26,7 @@
 <header style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color); padding: 1rem; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: var(--shadow);">
 <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
 <h1 style="margin: 0; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
-  <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🕌 Islamic Smart Clock</span>
+  <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Islamic Smart Clock</span>
 </h1>
 <button id="menu-toggle" onclick="toggleMenu()" style="background: var(--gradient-primary); border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.75rem; border-radius: var(--radius-lg); transition: all 0.3s ease; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;">
 <div id="hamburger" style="display: flex; flex-direction: column; gap: 3px; width: 24px; height: 20px; justify-content: center;">
@@ -45,23 +45,23 @@
 </div>
 
 <div style="padding: 1.5rem;">
-<button onclick="showSection('settings')" style="width: 100%; background: var(--gradient-primary); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
-⚙️ Settings
+<button onclick="showSection('settings')" style="width: 100%; background: var(--secondary-color); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
+Settings
 </button>
-<button onclick="showSection('about')" style="width: 100%; background: var(--gradient-secondary); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
-ℹ️ About
+<button onclick="showSection('about')" style="width: 100%; background: var(--secondary-color); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
+About
 </button>
-<button onclick="showSection('contact')" style="width: 100%; background: var(--gradient-accent); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
-📧 Contact
+<button onclick="showSection('contact')" style="width: 100%; background: var(--secondary-color); color: white; border: none; padding: 1rem; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease;">
+Contact
 </button>
 
 <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
 <h3 style="margin: 0 0 1rem 0; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;">Quick Actions</h3>
 <button onclick="requestNotificationPermission()" style="width: 100%; background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-md); font-weight: 500; cursor: pointer; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease;">
-� Enable Notifications
+Enable Notifications
 </button>
 <button onclick="location.reload()" style="width: 100%; background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-md); font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease;">
-🔄 Refresh Data
+Refresh Data
 </button>
 </div>
 </div>
@@ -73,16 +73,16 @@
 <div id="settings-modal" class="modal" style="display: none;">
 <div class="modal-content">
 <div class="modal-header">
-<h2>⚙️ Settings</h2>
+<h2>Settings</h2>
 <button onclick="closeModal('settings')" class="close-btn">✕</button>
 </div>
 <div class="modal-body">
 <div class="settings-tabs">
-<button onclick="showSettingsTab('display')" class="tab-btn active" data-tab="display">📱 Display</button>
-<button onclick="showSettingsTab('prayer')" class="tab-btn" data-tab="prayer">🕌 Prayer</button>
-<button onclick="showSettingsTab('notifications')" class="tab-btn" data-tab="notifications">🔔 Notifications</button>
-<button onclick="showSettingsTab('sound')" class="tab-btn" data-tab="sound">🔊 Sound</button>
-<button onclick="showSettingsTab('location')" class="tab-btn" data-tab="location">📍 Location</button>
+<button onclick="showSettingsTab('display')" class="tab-btn active" data-tab="display" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.5rem;">Display</button>
+<button onclick="showSettingsTab('prayer')" class="tab-btn" data-tab="prayer" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.5rem;">Prayer</button>
+<button onclick="showSettingsTab('notifications')" class="tab-btn" data-tab="notifications" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.5rem;">Notifications</button>
+<button onclick="showSettingsTab('sound')" class="tab-btn" data-tab="sound" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.5rem;">Sound</button>
+<button onclick="showSettingsTab('location')" class="tab-btn" data-tab="location" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.5rem;">Location</button>
 </div>
 
 <div id="display-tab" class="tab-content active">
@@ -176,7 +176,7 @@
 <div id="about-modal" class="modal" style="display: none;">
 <div class="modal-content">
 <div class="modal-header">
-<h2>ℹ️ About</h2>
+<h2>About</h2>
 <button onclick="closeModal('about')" class="close-btn">✕</button>
 </div>
 <div class="modal-body">
@@ -184,15 +184,23 @@
 <p>Version 2.0.0</p>
 <p>A comprehensive Islamic application featuring prayer times, Qibla compass, Hijri calendar, and daily Islamic inspiration.</p>
 
+<div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+<h4 style="color: #92400e; margin: 0 0 0.5rem 0; font-size: 1rem;">⚠️ Important Notice</h4>
+<p style="color: #92400e; margin: 0; font-size: 0.9rem; line-height: 1.6;">
+<strong>Page Still Under Maintenance and Development</strong><br>
+This application is currently for educational purposes only and not a 'FATWA' that someone can rely on for religious matters. Users should expect sudden releases and changes, so they should normalize hitting the refresh button on the menu section frequently to get the latest updates and improvements.
+</p>
+</div>
+
 <h4>Key Features:</h4>
 <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
-<li>🕌 Accurate prayer times for your location</li>
-<li>🧭 Interactive Qibla compass</li>
-<li>📅 Hijri calendar integration</li>
-<li>🌙 Ramadan tracking and timers</li>
-<li>💰 Zakat calculator</li>
-<li>📖 Daily Quran verses and Hadith</li>
-<li>🔔 Prayer notifications and reminders</li>
+<li>Accurate prayer times for your location</li>
+<li>Interactive Qibla compass</li>
+<li>Hijri calendar integration</li>
+<li>Ramadan tracking and timers</li>
+<li>Zakat calculator</li>
+<li>Daily Quran verses and Hadith</li>
+<li>Prayer notifications and reminders</li>
 </ul>
 
 <h4>Version History:</h4>
@@ -207,7 +215,7 @@ v1.0.0 - Initial release with basic prayer times
 © 2025 All rights reserved</p>
 
 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2rem;">
-Built with ❤️ for the Muslim community
+Built with love for the Muslim community
 </p>
 </div>
 </div>
@@ -217,7 +225,7 @@ Built with ❤️ for the Muslim community
 <div id="contact-modal" class="modal" style="display: none;">
 <div class="modal-content">
 <div class="modal-header">
-<h2>📧 Contact</h2>
+<h2>Contact</h2>
 <button onclick="closeModal('contact')" class="close-btn">✕</button>
 </div>
 <div class="modal-body">
@@ -226,22 +234,22 @@ Built with ❤️ for the Muslim community
 
 <h4>Contact Information:</h4>
 <div style="text-align: left; max-width: 400px; margin: 0 auto;">
-<p>📧 <strong>Email:</strong> support@islamicclock.com</p>
-<p>📧 <strong>Support:</strong> help@islamicclock.com</p>
-<p>📧 <strong>Feedback:</strong> feedback@islamicclock.com</p>
+<p><strong>Email:</strong> support@islamicclock.com</p>
+<p><strong>Support:</strong> help@islamicclock.com</p>
+<p><strong>Feedback:</strong> feedback@islamicclock.com</p>
 </div>
 
 <h4>Follow Us:</h4>
 <div style="display: flex; justify-content: center; gap: 1rem; margin: 1rem 0;">
-<a href="#" style="color: #1877f2; text-decoration: none; font-size: 1.5rem;">📘</a>
-<a href="#" style="color: #1da1f2; text-decoration: none; font-size: 1.5rem;">🐦</a>
-<a href="#" style="color: #e4405f; text-decoration: none; font-size: 1.5rem;">📷</a>
-<a href="#" style="color: #25d366; text-decoration: none; font-size: 1.5rem;">💬</a>
+<a href="#" style="color: #1877f2; text-decoration: none; font-size: 1.5rem;">Facebook</a>
+<a href="#" style="color: #1da1f2; text-decoration: none; font-size: 1.5rem;">Twitter</a>
+<a href="#" style="color: #e4405f; text-decoration: none; font-size: 1.5rem;">Instagram</a>
+<a href="#" style="color: #25d366; text-decoration: none; font-size: 1.5rem;">WhatsApp</a>
 </div>
 
 <h4>Report Issues:</h4>
 <p>Found a bug or have a feature request?</p>
-<p>🔗 <a href="#" style="color: var(--primary-color);">GitHub Issues</a></p>
+<p>&#x1F510; <a href="#" style="color: var(--primary-color);">GitHub Issues</a></p>
 
 <h4>Response Time:</h4>
 <p style="font-size: 0.9rem; color: var(--text-secondary);">
@@ -249,7 +257,7 @@ We typically respond within 24-48 hours during business days.
 </p>
 
 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2rem;">
-Thank you for using Islamic Smart Clock! 🕌
+Thank you for using Islamic Smart Clock!
 </p>
 </div>
 </div>
@@ -382,7 +390,7 @@ Thank you for using Islamic Smart Clock! 🕌
 <div id="exchange-info" style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem; font-style: italic;">
 Exchange rates and mineral prices are approximate. Update with current market rates for accuracy.
 </div>
-<button onclick="calculateZakat()" style="background: var(--primary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%;">Calculate Zakat</button>
+<button onclick="calculateZakat()" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%;">Calculate Zakat</button>
 <div id="zakat-result" style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-color); display: none;">
 <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Total Wealth:</div>
 <div id="total-wealth" style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;"></div>
