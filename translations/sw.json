@@ -14,8 +14,8 @@
     "close": "✕"
   },
   "sections": {
-    "islamic_inspiration": "Mashindikano ya Kiislamu",
-    "ramadan_2025": "Ramadhani 2025",
+    "islamic_inspiration": "Hamasa ya Kiimani",
+    "ramadan_2025": "Ramadan 2025",
     "zakat_calculator": "Kikokotoo cha Zakat",
     "prayer_times": "Nyakati za Swala",
     "qibla_direction": "Mwelekeo wa Qibla",
@@ -34,8 +34,8 @@
   },
   "ramadan": {
     "sehri_ends": "Sehri Inaisha",
-    "iftar_time": "Muda wa Iftar",
-    "ramadan_day": "Siku ya Ramadhani"
+    "iftar_time": "Wakati wa Iftar",
+    "ramadan_day": "Siku ya Ramadan"
   },
   "zakat": {
     "gold_grams": "Dhahabu (gramu)",

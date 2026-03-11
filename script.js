@@ -79,19 +79,19 @@ class LanguageManager {
         }
       },
       'sw': {
-        "app": { "title": "Saa ya Kiislamu ya Akili" },
-        "header": { "title": "Saa ya Kiislamu ya Akili" },
-        "menu": { "menu": "Menyu", "settings": "Mipangilio", "about": "Kuhusu", "contact": "Wasiliana" },
+        "app": { "title": "As-saat | Al-asr" },
+        "header": { "title": "As-saat | Al-asr<br><small style='font-size: 0.6em; opacity: 0.8;'>The Islamic Watch</small>" },
+        "menu": { "menu": "Menyu", "settings": "Mipangilio", "about": "Kuhusu", "contact": "Mawasiliano" },
         "sections": {
-          "islamic_inspiration": "Mashindikano ya Kiislamu",
-          "ramadan_2025": "Ramadhani 2025",
+          "islamic_inspiration": "Kichocheo cha Imaan",
+          "ramadan_2025": "Ramadan 2025",
           "zakat_calculator": "Kikokotoo cha Zakat",
           "prayer_times": "Nyakati za Swala", 
           "qibla_direction": "Mwelekeo wa Qibla",
           "monthly_timetable": "Ratiba ya Kila Mwezi"
         },
         "settings": {
-          "display_settings": "Mipangilio ya Onyesho",
+          "display_settings": "Mipangilio ya Muonekano",
           "prayer_settings": "Mipangilio ya Swala",
           "notification_settings": "Mipangilio ya Arifa",
           "sound_settings": "Mipangilio ya Sauti",
@@ -135,7 +135,7 @@ class LanguageManager {
     // Header title
     const headerTitle = document.querySelector('h1 span');
     if (headerTitle) {
-      headerTitle.textContent = this.t('header.title');
+      headerTitle.innerHTML = this.t('header.title');
     }
     
     // Menu title
