@@ -28,12 +28,12 @@
     "asr": "Asr",
     "maghrib": "Maghrib",
     "isha": "Isha",
-    "jummah": "Jummah",
+    "jummah": "Jumu'ah",
     "next_prayer": "Next Prayer",
     "current_prayer": "Current Prayer"
   },
   "ramadan": {
-    "sehri_ends": "Sehri Ends",
+    "sehri_ends": "Suhoor Ends",
     "iftar_time": "Iftar Time",
     "ramadan_day": "Ramadan Day"
   },
@@ -95,7 +95,7 @@
   "about": {
     "about": "About",
     "version": "Version",
-    "description": "A comprehensive Islamic application featuring prayer times, Qibla compass, Hijri calendar, and daily Islamic inspiration.",
+    "description": "A comprehensive Islamic application featuring prayer times, Qibla compass, Hijri calendar, and daily Islamic inspiration for the Muslim community.",
     "important_notice": "Important Notice",
     "notice_text": "Page Still Under Maintenance and Development\n\nThis application is currently for educational purposes only and not a 'FATWA' that someone can rely on for religious matters. Users should expect sudden releases and changes, so they should normalize hitting the refresh button on the menu section frequently to get the latest updates and improvements.",
     "key_features": "Key Features",

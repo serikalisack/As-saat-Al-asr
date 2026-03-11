@@ -83,7 +83,7 @@ class LanguageManager {
         "header": { "title": "As-saat | Al-asr<br><small style='font-size: 0.6em; opacity: 0.8;'>The Islamic Watch</small>" },
         "menu": { "menu": "Menyu", "settings": "Mipangilio", "about": "Kuhusu", "contact": "Mawasiliano" },
         "sections": {
-          "islamic_inspiration": "Kichocheo cha Imaan",
+          "islamic_inspiration": "Hamasa ya Imaan",
           "ramadan_2025": "Ramadan 2025",
           "zakat_calculator": "Kikokotoo cha Zakat",
           "prayer_times": "Nyakati za Swala", 

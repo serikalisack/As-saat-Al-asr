@@ -14,7 +14,7 @@
     "close": "✕"
   },
   "sections": {
-    "islamic_inspiration": "Hamasa ya Kiimani",
+    "islamic_inspiration": "Hamasa ya Imaan",
     "ramadan_2025": "Ramadan 2025",
     "zakat_calculator": "Kikokotoo cha Zakat",
     "prayer_times": "Nyakati za Swala",
@@ -28,12 +28,12 @@
     "asr": "Asr",
     "maghrib": "Maghrib",
     "isha": "Isha",
-    "jummah": "Jumapili",
+    "jummah": "Jumamosi",
     "next_prayer": "Swala Ifuatayo",
-    "current_prayer": "Swala la Sasa"
+    "current_prayer": "Swala ya Sasa"
   },
   "ramadan": {
-    "sehri_ends": "Sehri Inaisha",
+    "sehri_ends": "Sahuru Inaisha",
     "iftar_time": "Wakati wa Iftar",
     "ramadan_day": "Siku ya Ramadan"
   },
@@ -95,12 +95,12 @@
   "about": {
     "about": "Kuhusu",
     "version": "Toleo",
-    "description": "Programu kamili ya Kiislamu inayojumuisha nyakati za swala, busara ya Qibla, kalenda ya Hijri, na mashindikano ya kila siku ya Kiislamu.",
+    "description": "Programu kamili ya Kiislamu inayojumuisha nyakati za swala, busara ya Qibla, kalenda ya Hijri, na hamasa ya kila siku ya Kiimani kwa ajili ya jamii ya Waislamu.",
     "important_notice": "Arifa Muhimu",
     "notice_text": "Ukurasa Bado Chini ya Matunzo na Maendeleo\n\nProgramu hii kwa sasa ni kwa madhumuni ya kielimu tu na sio 'FATWA' ambayo mtu anaweza kuitegemea kwa mambo ya dini. Watumiaji wanapaswa kutarajia matoleo na mabadiliko ya ghafla, kwa hivyo wanapaswa kawaida kubonyeza kitufe cha upya katika sehemu ya menyu mara nyingi kupata updates na uboreshaji wa hivi karibuni.",
     "key_features": "Vipengele Vikuu",
     "version_history": "Historia ya Toleo",
-    "developer": "Mstari",
+    "developer": "Msanidi Programu",
     "copyright": "© 2025 Haki zote zimehifadhiwa",
     "built_with_love": "Imejengwa kwa upendo kwa jamii ya Kiislamu"
   },
