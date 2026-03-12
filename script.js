@@ -1,5 +1,65 @@
 "use strict";
 
+// ==================== HIJRI DATE CALCULATION ====================
+function calculateHijriDate(date) {
+  // Modified Islamic calendar calculation
+  const gregorianDate = new Date(date);
+  const year = gregorianDate.getFullYear();
+  const month = gregorianDate.getMonth() + 1; // JavaScript months are 0-11
+  const day = gregorianDate.getDate();
+  
+  // Islamic calendar calculation (Umm al-Qura)
+  let islamicYear, islamicMonth, islamicDay;
+  
+  if (year > 1582 || (year === 1582 && month > 10) || (year === 1582 && month === 10 && day > 15)) {
+    // After Islamic calendar reform
+    const z = (year - 1583) * 365.25 + 10 * Math.floor((year - 1583) / 33) + 2;
+    const d = Math.floor(z / 30);
+    const h = Math.floor((z - Math.floor(z / 30) * 30) / 11);
+    const g = Math.floor((h - 1) / 11) + 1;
+    
+    islamicYear = g + 1;
+    islamicMonth = h - 1;
+    islamicDay = d - 1;
+  } else {
+    // Before Islamic calendar reform
+    const z = (year - 1582) * 365.25 + 10 * Math.floor((year - 1582) / 33) + 1;
+    const d = Math.floor(z / 30);
+    const h = Math.floor((z - Math.floor(z / 30) * 30) / 11);
+    const g = Math.floor((h - 1) / 11) + 1;
+    
+    islamicYear = g;
+    islamicMonth = h - 1;
+    islamicDay = d - 1;
+  }
+  
+  // Adjust for day of week offset
+  if (day < 3) {
+    islamicDay += 2;
+  } else {
+    islamicDay += 1;
+  }
+  
+  if (islamicDay > 30) {
+    islamicDay -= 30;
+    islamicMonth += 1;
+  }
+  
+  if (islamicMonth > 12) {
+    islamicMonth -= 12;
+    islamicYear += 1;
+  }
+  
+  const monthNames = [
+    "Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani",
+    "Jumada al-Ula", "Jumada al-Thani", "Rajab", "Shaban",
+    "Ramadan", "Shawwal", "Dhu al-Qidah", "Dhu al-Hijjah"
+  ];
+  
+  return `${islamicDay} ${monthNames[islamicMonth - 1]} ${islamicYear} AH`;
+}
+
+// Global constants and state
 const STORAGE_KEY = "islamicAppPrefs";
 const KAABA_LAT = 21.4225;
 const KAABA_LON = 39.8262;
@@ -350,11 +410,9 @@ function updateDate(el) {
     day: "numeric"
   }).format(now);
 
-  el.hijri.textContent = new Intl.DateTimeFormat("en-TZ-u-ca-islamic", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  }).format(now);
+  // Calculate Hijri date properly
+  const hijriDate = calculateHijriDate(now);
+  el.hijri.textContent = hijriDate;
 }
 
 /* ==================== QIBLA ==================== */
