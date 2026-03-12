@@ -1,10 +1,10 @@
 {
   "app": {
-    "title": "Islamic Smart Clock",
+    "title": "As-saat | Al-asr",
     "loading": "Loading..."
   },
   "header": {
-    "title": "Islamic Smart Clock"
+    "title": "As-saat | Al-asr"
   },
   "menu": {
     "menu": "Menu",
@@ -117,7 +117,7 @@
     "found_bug": "Found a bug or have a feature request?",
     "response_time": "Response Time",
     "response_text": "We typically respond within 24-48 hours during business days.",
-    "thank_you": "Thank you for using Islamic Smart Clock!"
+    "thank_you": "Thank you for using As-saat | Al-asr!"
   },
   "actions": {
     "enable_notifications": "Enable Notifications",

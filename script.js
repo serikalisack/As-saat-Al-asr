@@ -39,8 +39,8 @@ class LanguageManager {
     // Fallback translations embedded in JavaScript for file:// protocol
     const translations = {
       'en': {
-        "app": { "title": "Islamic Smart Clock" },
-        "header": { "title": "Islamic Smart Clock" },
+        "app": { "title": "As-saat | Al-asr" },
+        "header": { "title": "As-saat | Al-asr" },
         "menu": { "menu": "Menu", "settings": "Settings", "about": "About", "contact": "Contact" },
         "sections": {
           "islamic_inspiration": "Islamic Inspiration",
