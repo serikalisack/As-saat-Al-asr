@@ -27,6 +27,26 @@
 </head>
 
 <body>
+<div id="splash-screen" style="position: fixed; inset: 0; background: radial-gradient(circle at top, #1e40af 0, #020617 55%, #000 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; color: #e5e7eb; transition: opacity 0.5s ease, visibility 0.5s ease;">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+    <div style="width: 120px; height: 120px; border-radius: 32px; background: rgba(15,23,42,0.85); display: flex; align-items: center; justify-content: center; box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(56,189,248,0.4); border: 1px solid rgba(148,163,184,0.3);">
+      <img src="icons/icon-192.png" alt="As-saat | Al-asr" style="width: 78px; height: 78px; border-radius: 24px;">
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 1.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #facc15;">
+        As-saat | Al-asr
+      </div>
+      <div style="margin-top: 0.35rem; font-size: 0.9rem; color: #cbd5f5;">
+        The Islamic Watch
+      </div>
+    </div>
+    <div style="margin-top: 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+      <div style="width: 64px; height: 64px; border-radius: 999px; border: 3px solid rgba(148,163,184,0.2); border-top-color: #38bdf8; border-right-color: #22c55e; border-bottom-color: #f97316; animation: spin 1s linear infinite;"></div>
+      <div style="font-size: 0.85rem; color: #9ca3af;">Preparing prayer times & calendar…</div>
+    </div>
+  </div>
+</div>
+
 <header style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color); padding: 1rem; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: var(--shadow);">
 <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
 <h1 style="margin: 0; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
@@ -293,10 +313,14 @@ Thank you for using As-saat | Al-asr!
 <div id="islamic-content">
 <p id="verse-of-day" style="font-style: italic; margin: 1rem 0; line-height: 1.8;"></p>
 <p id="hadith-of-day" style="font-style: italic; margin: 1rem 0; line-height: 1.8; color: var(--text-secondary);"></p>
-<div id="eid-dates" style="margin: 1rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md);">
-<h4 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Upcoming Eid Dates</h4>
-<div id="eid-dates-content"></div>
 </div>
+</section>
+
+<section id="upcoming-events-section">
+<h3>Upcoming Events</h3>
+<div id="eid-dates" style="margin: 1rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md);">
+<h4 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Upcoming Events</h4>
+<div id="eid-dates-content"></div>
 </div>
 </section>
 
@@ -463,5 +487,11 @@ Exchange rates and mineral prices are approximate. Update with current market ra
 </main>
 
 <script src="script.js"></script>
+
+<style>
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
 </body>
 </html>

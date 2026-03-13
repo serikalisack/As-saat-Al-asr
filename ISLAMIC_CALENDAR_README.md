@@ -9,9 +9,9 @@ This Islamic calendar feature provides **astronomical calculations only**. Islam
 ## Current Islamic Calendar (2026)
 
 - **Today**: Friday, Ramadan 24, 1447 AH = March 13, 2026
-- **Ramadan 1447 AH**: March 11 - April 9, 2026 (29 days)
-- **Eid al-Fitr 1447 AH**: April 10, 2026 (1 Shawwal)
-- **Eid al-Adha 1447 AH**: June 17, 2026 (10 Dhu al-Hijjah)
+- **Ramadan 1447 AH**: 
+- **Eid al-Fitr 1447 AH**: 
+- **Eid al-Adha 1447 AH**: 
 
 ## Files
 
