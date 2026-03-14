@@ -751,10 +751,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (langTop) langTop.addEventListener("change", onLangChange);
   if (langInSettings) langInSettings.addEventListener("change", onLangChange);
 
-  // Load translations then inspiration, then hide splash
+  // Load translations then inspiration, then hide splash (a bit slower for a premium feel)
   setLanguage(currentLang).finally(() => {
     loadDailyInspiration();
-    setTimeout(hideSplash, 700);
+    setTimeout(hideSplash, 1400);
   });
 });
 
