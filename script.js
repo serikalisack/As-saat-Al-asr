@@ -10,6 +10,124 @@ function safeNumber(value) {
   return Number.isFinite(n) ? n : 0;
 }
 
+// ==================== TRANSLATION STATE ====================
+
+let currentLang = "en";
+let translations = null;
+
+function getStoredLanguage() {
+  try {
+    const stored = localStorage.getItem("language") || "en";
+    if (stored === "en" || stored === "ar" || stored === "sw") return stored;
+  } catch {
+    // ignore
+  }
+  return "en";
+}
+
+async function loadTranslations(lang) {
+  try {
+    const res = await fetch(`translations/${lang}.json`, { cache: "no-store" });
+    translations = await res.json();
+  } catch (e) {
+    console.error("Error loading translations for", lang, e);
+    translations = null;
+  }
+}
+
+function syncLanguageSelects() {
+  const top = $("language-select-top");
+  const inSettings = $("language-select");
+  if (top) top.value = currentLang;
+  if (inSettings) inSettings.value = currentLang;
+}
+
+function applyTranslations() {
+  if (!translations) return;
+  const t = translations;
+
+  // Document direction
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+
+  // Side menu header & buttons
+  const menuTitle = $("side-menu-title");
+  if (menuTitle) menuTitle.textContent = t.menu?.menu || "Menu";
+
+  const btnSettings = $("btn-settings");
+  if (btnSettings) btnSettings.firstChild.nodeValue = (t.menu?.settings || "Settings") + " ";
+
+  const btnAbout = $("btn-about");
+  if (btnAbout) btnAbout.firstChild.nodeValue = (t.menu?.about || "About") + " ";
+
+  const btnContact = $("btn-contact");
+  if (btnContact) btnContact.firstChild.nodeValue = (t.menu?.contact || "Contact") + " ";
+
+  const qaTitle = $("side-menu-quick-title");
+  if (qaTitle) qaTitle.textContent = t.app?.loading ? qaTitle.textContent : qaTitle.textContent;
+
+  const btnEnable = $("btn-enable-notifications");
+  if (btnEnable && t.actions?.enable_notifications) {
+    btnEnable.firstChild.nodeValue = t.actions.enable_notifications + " ";
+  }
+  const btnRefresh = $("btn-refresh-data");
+  if (btnRefresh && t.actions?.refresh_data) {
+    btnRefresh.firstChild.nodeValue = t.actions.refresh_data + " ";
+  }
+
+  // Main section titles
+  const inspTitle = document.querySelector("section:nth-of-type(1) > h3");
+  if (inspTitle && t.sections?.islamic_inspiration) {
+    inspTitle.textContent = t.sections.islamic_inspiration;
+  }
+  const eventsTitle = document.querySelector("#upcoming-events-section > h3");
+  if (eventsTitle && t.sections?.islamic_events) {
+    eventsTitle.textContent = t.sections.islamic_events;
+  }
+  const ramadanTitle = document.querySelector("#ramadan-section > h3");
+  if (ramadanTitle && t.sections?.ramadan_2025) {
+    ramadanTitle.textContent = t.sections.ramadan_2025;
+  }
+
+  // Zakat section title
+  const zakatTitle = document.querySelector("section:nth-of-type(3) > h3");
+  if (zakatTitle && t.sections?.zakat_calculator) {
+    zakatTitle.textContent = t.sections.zakat_calculator;
+  }
+
+  // Zakat labels
+  const labelGold = document.querySelector('label[for="gold-value"]');
+  if (labelGold && t.zakat?.gold_grams) labelGold.textContent = t.zakat.gold_grams + ":";
+  const labelSilver = document.querySelector('label[for="silver-value"]');
+  if (labelSilver && t.zakat?.silver_grams) labelSilver.textContent = t.zakat.silver_grams + ":";
+
+  // Settings modal header and tabs
+  const settingsHeader = document.querySelector("#settings-modal .modal-header h2");
+  if (settingsHeader && t.menu?.settings) settingsHeader.textContent = t.menu.settings;
+
+  const tabs = document.querySelectorAll(".settings-tabs .tab-btn");
+  if (tabs.length >= 5 && t.settings) {
+    tabs[0].textContent = t.settings.display_settings || tabs[0].textContent;
+    tabs[1].textContent = t.settings.prayer_settings || tabs[1].textContent;
+    tabs[2].textContent = t.settings.notification_settings || tabs[2].textContent;
+    tabs[3].textContent = t.settings.sound_settings || tabs[3].textContent;
+    tabs[4].textContent = t.settings.location_settings || tabs[4].textContent;
+  }
+}
+
+async function setLanguage(lang) {
+  currentLang = lang;
+  try {
+    localStorage.setItem("language", lang);
+  } catch {
+    // ignore
+  }
+  syncLanguageSelects();
+  await loadTranslations(lang);
+  applyTranslations();
+  loadDailyInspiration();
+}
+
 function getHijriAdjustmentDays() {
   try {
     const raw = localStorage.getItem("hijriAdjustmentDays");
@@ -190,9 +308,32 @@ const HADITHS = [
   "“A Muslim is the one from whose tongue and hand the people are safe.” (Nasa'i)",
 ];
 
+const DUA_LINES = [
+  "اللّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+  "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي",
+  "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ",
+  "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+];
+
+const DUA_TRANSLATIONS = {
+  en: [
+    "O Allah, help me to remember You, to thank You, and to worship You in the best manner.",
+    "My Lord, make me an establisher of prayer, and [many] from my descendants.",
+    "My Lord, forgive me, my parents, and the believers.",
+    "Our Lord, grant us good in this world and good in the Hereafter and protect us from the punishment of the Fire.",
+  ],
+  sw: [
+    "Ee Mola, nisaidie nikukumbuke, nikushukuru na kukuabudu kwa njia iliyo bora.",
+    "Mola wangu, nifanye niwe msimamishaji wa swala, na katika kizazi changu pia.",
+    "Mola wangu, nisamehe mimi, wazazi wangu na waumini wote.",
+    "Mola wetu, tupe kheri ya dunia na kheri ya Akhera na utulinde na adhabu ya Moto.",
+  ],
+};
+
 function loadDailyInspiration() {
   const verseEl = $("verse-of-day");
   const hadithEl = $("hadith-of-day");
+  const duaEl = $("dua-line");
   if (!verseEl || !hadithEl) return;
 
   const today = new Date();
@@ -207,6 +348,30 @@ function loadDailyInspiration() {
 
   verseEl.textContent = VERSES[index];
   hadithEl.textContent = HADITHS[hadithIndex];
+
+  if (duaEl && DUA_LINES.length > 0) {
+    const lang = currentLang || "en";
+    const duaIndex =
+      (today.getFullYear() * 3000 +
+        today.getMonth() * 33 +
+        today.getDate()) %
+      DUA_LINES.length;
+    const arabic = DUA_LINES[duaIndex];
+    const translation =
+      DUA_TRANSLATIONS[lang] && DUA_TRANSLATIONS[lang][duaIndex]
+        ? DUA_TRANSLATIONS[lang][duaIndex]
+        : null;
+
+    if (lang === "ar" || !translation) {
+      duaEl.textContent = arabic;
+      duaEl.dir = "rtl";
+      duaEl.lang = "ar";
+    } else {
+      duaEl.innerHTML = `<span dir="rtl" lang="ar">${arabic}</span><br><span style="font-size: 0.9em; color: var(--text-secondary);">${translation}</span>`;
+      duaEl.dir = "";
+      duaEl.lang = "";
+    }
+  }
 }
 
 // ==================== EID DATES ====================
@@ -423,14 +588,44 @@ function toggleMenu() {
 }
 
 function showSection(section) {
-  if (section === "settings") {
-    openModal("settings");
-  } else if (section === "about") {
-    openModal("about");
-  } else if (section === "contact") {
-    openModal("contact");
-  }
-  toggleMenu();
+  const main = $("side-menu-main");
+  const detail = $("side-menu-detail");
+  const titleEl = $("side-menu-title");
+  const closeBtn = $("side-menu-close-btn");
+  if (!main || !detail || !titleEl || !closeBtn) return;
+
+  const templates = (window._sideMenuTemplates =
+    window._sideMenuTemplates ||
+    {
+      settings:
+        document.querySelector("#settings-modal .modal-body")?.innerHTML || "",
+      about:
+        document.querySelector("#about-modal .modal-body")?.innerHTML || "",
+      contact:
+        document.querySelector("#contact-modal .modal-body")?.innerHTML || "",
+    });
+
+  main.style.display = "none";
+  detail.style.display = "block";
+
+  let title = "Menu";
+  if (section === "settings") title = translations?.menu?.settings || "Settings";
+  else if (section === "about") title = translations?.menu?.about || "About";
+  else if (section === "contact")
+    title = translations?.menu?.contact || "Contact";
+
+  titleEl.textContent = title;
+  closeBtn.textContent = "←";
+  closeBtn.onclick = () => {
+    detail.innerHTML = "";
+    titleEl.textContent = translations?.menu?.menu || "Menu";
+    closeBtn.textContent = "✕";
+    closeBtn.onclick = toggleMenu;
+    main.style.display = "block";
+    detail.style.display = "none";
+  };
+
+  detail.innerHTML = templates[section] || "";
 }
 
 function openModal(name) {
@@ -523,6 +718,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 600);
   };
 
+  currentLang = getStoredLanguage();
+  syncLanguageSelects();
+
   updateClockAndDates();
   setInterval(updateClockAndDates, 1000);
 
@@ -532,7 +730,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initThemeToggle();
-  loadDailyInspiration();
   initEidDates();
   initRamadanSection();
   updateMarketPrices();
@@ -545,7 +742,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Give the UI a short moment to paint, then hide splash
-  setTimeout(hideSplash, 900);
+  const langTop = $("language-select-top");
+  const langInSettings = $("language-select");
+  const onLangChange = (e) => {
+    const lang = e.target.value || "en";
+    setLanguage(lang);
+  };
+  if (langTop) langTop.addEventListener("change", onLangChange);
+  if (langInSettings) langInSettings.addEventListener("change", onLangChange);
+
+  // Load translations then inspiration, then hide splash
+  setLanguage(currentLang).finally(() => {
+    loadDailyInspiration();
+    setTimeout(hideSplash, 700);
+  });
 });
 
