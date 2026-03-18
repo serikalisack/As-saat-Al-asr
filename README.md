@@ -1,138 +1,165 @@
-# 🕌 As-saat | Al-asr - The Islamic Watch
+# As-saat | Al-asr  
+**Islamic Digital Clock with Prayer Times and Hijri Calendar**  
 
-<div align="center">
+![As-saat Logo](icons/icon-192.png)  
 
-**A comprehensive Islamic digital clock with prayer times, Qibla compass, Hijri calendar, and daily Islamic inspiration.**
-
-[🌐 **Live Demo**](https://serikalisack.github.io/As-saat-Al-asr/) | [📱 **Install PWA**](https://serikalisack.github.io/As-saat-Al-asr/) | [📖 **Documentation**](#features)
-
-![Islamic Clock](icons/icon-192.png)
+As-saat | Al-asr is a comprehensive Islamic application featuring accurate prayer times, Qibla compass, Hijri calendar, and daily Islamic inspiration. It's designed with simplicity and accessibility in mind for Muslims worldwide. With modern web technologies and a clean, user-friendly interface, As-saat brings essential Islamic tools to your fingertips.
 
 ---
 
-## ⚠️ Important Islamic Calendar Notice
-
-**This application provides astronomical calculations for Islamic dates. Actual Islamic dates, especially Eid dates, are determined by moon sighting and local Islamic authority rulings.**
-
-🔔 **Always verify important dates with your local mosque or Islamic authority. Do not rely solely on this application's calculations for religious observances.**
-
-📋 See [ISLAMIC_CALENDAR_README.md](ISLAMIC_CALENDAR_README.md) for detailed information about Islamic date calculations.
-
----
-
-## ✨ Key Features
-
-### 🕐 **Prayer Times & Islamic Essentials**
-- 🌅 **Accurate Prayer Times** for your location
-- 🧭 **Interactive Qibla Compass** with device orientation
-- 📅 **Hijri Calendar** with manual verified dates
-- 📿 **Daily Quran Verses & Hadiths**
-- 🎯 **Ramadan Tracking** with Sehri/Iftar timers
-- 💰 **Zakat Calculator** for precise calculations
-
-### 🌍 **Multi-Language Support**
-- 🇺🇸 **English** - Full interface
-- 🇸🇦 **العربية** - Arabic RTL support
-- 🇰🇪 **Kiswahili** - Swahili translations
-
-### 📱 **Modern Web Experience**
-- 🌙 **Dark/Light Mode** with smooth transitions
-- 📲 **Progressive Web App** - Install on any device
-- 🔄 **Offline Support** - Works without internet
-- 🔔 **Prayer Notifications** & reminders
-- 📍 **Location-based** calculations
+## Table of Contents  
+- [Key Features](#key-features)  
+- [Tech Stack](#tech-stack)  
+- [Islamic Features](#islamic-features)  
+- [How It Works](#how-it-works)  
+- [File Structure](#file-structure)  
+- [Installation](#installation)  
+- [License](#license)  
 
 ---
 
-## 🚀 Quick Start
+## Key Features  
 
-### 🌐 Try Live Demo
-**[https://serikalisack.github.io/As-saat-Al-asr/](https://serikalisack.github.io/As-saat-Al-asr/)**
+### Islamic Essentials  
+- **Prayer Times:** Accurate calculations based on your location  
+- **Qibla Compass:** Interactive compass with device orientation  
+- **Hijri Calendar:** Manual verified Islamic dates  
+- **Daily Inspiration:** Quran verses and Hadiths  
 
-### 💻 Local Installation
+### Modern Web Experience  
+- **Multi-language Support:** English, Arabic, Swahili  
+- **Dark/Light Mode:** Smooth theme transitions  
+- **Progressive Web App:** Install on any device  
+- **Offline Support:** Works without internet connection  
+- **Prayer Notifications:** Timely reminders for all prayers  
+
+### Advanced Tools  
+- **Ramadan Tracking:** Sehri/Iftar timers and daily progress  
+- **Zakat Calculator:** Precise Islamic calculations  
+- **Location-based Services:** Automatic prayer time adjustments  
+- **RTL Support:** Proper Arabic text display  
+
+---
+
+## Tech Stack  
+
+### Frontend  
+- HTML5, CSS3, JavaScript (ES6+)  
+- Responsive Design with CSS Variables  
+- Service Workers for PWA functionality  
+- Device Orientation API for compass  
+
+### Backend Integration  
+- Aladhan API for prayer times  
+- Manual Hijri calendar calculations  
+- Geolocation API for location services  
+- Local Storage for preferences  
+
+### Islamic Features  
+- Moment.js and Moment-Hijri for date calculations  
+- Manual Hijri calendar with verified dates  
+- Islamic content management system  
+- Multi-language translation system  
+
+---
+
+## Islamic Features  
+-----------------------------------------------------------------------------------------------
+| Feature           | Technology         | Input Type          | Key Capabilities           |  
+|-------------------|--------------------|---------------------|----------------------------|  
+| **Prayer Times**  | Aladhan API        | Location            | 5 daily prayers + next     |  
+| **Qibla Compass** | Device Orientation | Device Sensors      | Real-time direction        |  
+| **Hijri Calendar**| Manual Calendar    | Date Calculation    | Verified Islamic dates     |  
+| **Ramadan Tools** | Local Calculation  | Date Tracking       | Sehri/Iftar timers         |  
+-----------------------------------------------------------------------------------------------
+---
+
+## How It Works  
+
+1. **Launch App**: Open the web application on any modern browser  
+   ![App Screenshot](icons/icon-192.png)
+
+2. **Grant Permissions**: Allow location and notification access  
+   *Location for prayer times, notifications for reminders*
+
+3. **Select Language**: Choose from English, Arabic, or Swahili  
+   *Full interface translation with RTL support*
+
+4. **View Islamic Content**:  
+   - Real-time clock with Hijri/Gregorian display  
+   - Prayer times with countdown to next prayer  
+   - Qibla compass for accurate direction  
+   - Daily Quran verses and Hadiths  
+
+5. **Use Advanced Features**:  
+   - Ramadan tracking with daily progress  
+   - Zakat calculator for precise calculations  
+   - PWA installation for native app experience  
+
 ```bash
-# Clone the repository
+# Quick start guide
+git clone https://github.com/serikalisack/As-saat-Al-asr.git
+cd As-saat-Al-asr
+# Open index.html in your browser
+```
+
+## Installation  
+
+### Live Demo  
+Access the application directly at:  
+**https://serikalisack.github.io/As-saat-Al-asr/**
+
+### Local Development  
+```bash
+# Clone repository
 git clone https://github.com/serikalisack/As-saat-Al-asr.git
 
 # Navigate to project
 cd As-saat-Al-asr
 
 # Open in browser
-open index.html  # macOS
-start index.html # Windows
-xdg-open index.html # Linux
+# Double-click index.html or use local server
 ```
 
-### 📱 PWA Installation
-1. Visit the live demo
-2. Click **"Add to Home Screen"** in your browser
-3. Enjoy the app as a native application!
+### PWA Installation  
+1. Visit the live demo  
+2. Click "Add to Home Screen" in your browser  
+3. Install as a native application  
 
 ---
 
-## 🛠️ Technical Stack
+## About the Author   
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Date Calculations**: Manual Hijri calendar + Moment.js
-- **API Integration**: Aladhan API for prayer times
-- **Device Features**: Orientation API, Geolocation API
-- **PWA**: Service Workers, Web App Manifest
-- **UI/UX**: Responsive design, Dark mode, RTL support
+### Hey there..  
+#### I'm **Serikali**, passionate student and developer dedicated to leveraging technology for impactful solutions. Interested in AI, software development, and innovative technologies.  
+**Machine Learning Engineer** • **Full Stack Web Developer** • **Mobile App Developer**  
 
----
-
-## 📋 Usage Guide
-
-### 🔧 **Setup Requirements**
-- ✅ Modern web browser (Chrome, Firefox, Safari, Edge)
-- 📍 **Location permission** for accurate prayer times
-- 🔔 **Notification permission** for prayer alerts
-- 🧭 **Device orientation** for Qibla compass
-
-### 🎯 **Main Features**
-1. **Real-time Clock** with Hijri/Gregorian display
-2. **Prayer Times** with next prayer countdown
-3. **Qibla Compass** with visual guidance
-4. **Ramadan Tools** with daily tracking
-5. **Islamic Content** updated regularly
-6. **Multi-language** interface switching
+I am a lifelong learner, constantly exploring new technologies and methodologies to enhance my skills and knowledge in the field.  
 
 ---
 
-## 🤝 Contributing
-
-**⚠️ Important Note**: Please be mindful of the sensitive nature of Islamic calendar calculations. All changes to Islamic date functionality should include:
-- ✅ Appropriate disclaimers
-- 🧪 Thorough testing
-- 📋 Documentation updates
-- 🕌 Religious sensitivity
-
-### 📝 Development Guidelines
-- Follow existing code style
-- Test Islamic calculations carefully
-- Include disclaimers for date features
-- Document all changes
+### Expertise & Specialties  
+- Machine Learning & Deep Learning (Sklearn, TensorFlow, PyTorch)  
+- Full Stack Web Development (React, Node.js, MongoDB)  
+- Cross-platform Mobile Apps (React Native, Flutter)  
+- Clean code, scalable systems, and beautiful UI  
 
 ---
 
-## 📄 License
+### Let's Connect & Collaborate  
+Building the future of intelligent systems—one innovation at a time!  
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🌟 Support & Feedback
-
-- 🐛 **Report Issues**: [GitHub Issues](https://github.com/serikalisack/As-saat-Al-asr/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/serikalisack/As-saat-Al-asr/discussions)
-- 📧 **Contact**: support@islamicclock.com
+Let's turn ideas into reality!  
+**Email**: reach out at [serikalidevelopment@gmail.com](mailto:serikalidevelopment@gmail.com) for inquiries or collaboration opportunities!  
 
 ---
 
-<div align="center">
+## License  
 
-**Built with ❤️ for the Muslim community**
+This project is licensed under the MIT License - see the LICENSE file for details.  
+
+---
+
+Built with dedication for the Muslim community  
 
 © 2025 As-saat | Al-asr Team. All rights reserved.
-
-</div>
