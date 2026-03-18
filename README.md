@@ -162,4 +162,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Built with dedication for the Muslim community  
 
-© 2025 As-saat | Al-asr Team. All rights reserved.
+© 2026 As-saat | Al-asr Team. All rights reserved.
