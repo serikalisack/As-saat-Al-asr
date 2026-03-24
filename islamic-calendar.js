@@ -237,7 +237,7 @@ async function loadEidDates(el) {
     // Try to get from API first
     const currentYear = new Date().getFullYear();
     // Aladhan expects ISO-3166 alpha-2 country codes (e.g., TZ for Tanzania)
-    const response = await fetch(`https://api.aladhan.com/v1/holidays?year=${currentYear}&country=TZ`);
+    const response = await fetch(`https://api.aladhan.com/v1/gToHCalendar/${currentYear}`);
     const data = await response.json();
 
     if (data.code === 200 && data.data && Array.isArray(data.data)) {
