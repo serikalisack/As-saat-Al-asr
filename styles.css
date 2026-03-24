@@ -856,12 +856,139 @@ input[type="range"]::-moz-range-thumb:hover {
     padding: 0.75rem 1rem;
   }
   
-  h1 {
+  .header-title {
     font-size: 1.2rem;
   }
   
-  h1 img {
+  .header-title img {
     width: 32px;
     height: 32px;
+  }
+  
+  .main-title {
+    font-size: 0.9rem;
+  }
+  
+  .title-content small {
+    font-size: 0.6em;
+  }
+}
+
+/* ==================== HEADER RESPONSIVE FIXES ==================== */
+.header-title {
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: calc(100% - 120px);
+}
+
+.title-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.main-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.title-content small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Responsive header adjustments */
+@media (max-width: 768px) {
+  .header-title {
+    max-width: calc(100% - 140px);
+  }
+  
+  .main-title {
+    font-size: 1.1rem;
+  }
+  
+  .title-content small {
+    font-size: 0.65em;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-title {
+    max-width: calc(100% - 130px);
+  }
+  
+  .main-title {
+    font-size: 1rem;
+  }
+  
+  .title-content small {
+    font-size: 0.6em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    max-width: calc(100% - 120px);
+    gap: 0.5rem;
+  }
+  
+  .header-title img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .main-title {
+    font-size: 0.95rem;
+  }
+  
+  .title-content small {
+    font-size: 0.55em;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-title {
+    max-width: calc(100% - 110px);
+    gap: 0.4rem;
+  }
+  
+  .header-title img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .main-title {
+    font-size: 0.9rem;
+  }
+  
+  .title-content small {
+    font-size: 0.5em;
+  }
+}
+
+@media (max-width: 320px) {
+  .header-title {
+    max-width: calc(100% - 100px);
+    gap: 0.3rem;
+  }
+  
+  .header-title img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .main-title {
+    font-size: 0.85rem;
+  }
+  
+  .title-content small {
+    font-size: 0.45em;
+  }
+  
+  header {
+    padding: 0.5rem 0.75rem;
   }
 }

@@ -52,13 +52,13 @@
 
 <header style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color); padding: 1rem; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); box-shadow: var(--shadow);">
 <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
-<h1 style="margin: 0; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-  <img src="icons/icon-192.png" alt="Islamic Clock Logo" style="width: 40px; height: 40px; border-radius: 8px;">
-  <div style="display: flex; flex-direction: column;">
-    <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; border-bottom: 2px solid var(--primary-color); padding-bottom: 2px;">As-saat | Al-asr</span>
-    <small style="font-size: 0.7em; opacity: 0.8; color: var(--text-secondary); margin-top: 2px;">The Islamic Watch</small>
+<div class="header-title" style="margin: 0; font-size: 1.5rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem; flex-shrink: 1; min-width: 0;">
+  <img src="icons/icon-192.png" alt="Islamic Clock Logo" style="width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;">
+  <div class="title-content" style="display: flex; flex-direction: column; min-width: 0;">
+    <span class="main-title" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; border-bottom: 2px solid var(--primary-color); padding-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">As-saat | Al-asr</span>
+    <small style="font-size: 0.7em; opacity: 0.8; color: var(--text-secondary); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">The Islamic Watch</small>
   </div>
-</h1>
+</div>
 <div style="display: flex; align-items: center; gap: 0.5rem;">
   <!-- Language selector beside menu button -->
   <div class="language-selector-wrapper">
