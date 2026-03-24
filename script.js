@@ -84,10 +84,7 @@ function applyTranslations() {
   if (eventsTitle && t.sections?.islamic_events) {
     eventsTitle.textContent = t.sections.islamic_events;
   }
-  const ramadanTitle = document.querySelector("#ramadan-section > h3");
-  if (ramadanTitle && t.sections?.ramadan_2025) {
-    ramadanTitle.textContent = t.sections.ramadan_2025;
-  }
+  
 
   // Zakat section title
   const zakatTitle = document.querySelector("section:nth-of-type(3) > h3");

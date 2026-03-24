@@ -704,35 +704,6 @@ input[type="range"]::-moz-range-thumb:hover {
   text-align: center;
 }
 
-/* ==================== RAMADAN SECTION ==================== */
-.ramadan-section {
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-  border: 2px solid var(--warning-color);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden;
-}
-
-.ramadan-section::before {
-  content: '🌙';
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  opacity: 0.3;
-}
-
-.ramadan-timer {
-  background: var(--bg-primary);
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border: 1px solid var(--border-color);
-  font-weight: 500;
-}
 
 /* ==================== ZAKAT CALCULATOR ==================== */
 .zakat-calculator {
@@ -875,6 +846,16 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 /* ==================== HEADER RESPONSIVE FIXES ==================== */
+header {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.dark header {
+  background: rgba(15, 23, 42, 0.3);
+}
+
 .header-title {
   flex-shrink: 1;
   min-width: 0;
