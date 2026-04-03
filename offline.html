@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offline - As-saat | Al-asr</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e40af 0%, #0f172a 50%, #000000 100%);
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.offline-container {
+  max-width: 400px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.offline-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.offline-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  background: linear-gradient(135deg, #38bdf8, #1e40af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.offline-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+  opacity: 0.8;
+}
+
+.offline-features {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.retry-button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.retry-button:active {
+  transform: translateY(0);
+}
+
+.cached-data {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cached-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #10b981;
+}
+
+.last-sync {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+</style>
+</head>
+<body>
+<div class="offline-container">
+  <div class="offline-icon">📵</div>
+  <h1 class="offline-title">You're Offline</h1>
+  <p class="offline-message">
+    No internet connection detected. Some features may be unavailable, but you can still access cached content.
+  </p>
+  
+  <div class="offline-features">
+    <div class="feature-item">
+      <div class="feature-icon">🕌</div>
+      <div>
+        <strong>Prayer Times</strong>
+        <div style="font-size: 0.8rem; opacity: 0.7;">Last cached data available</div>
+      </div>
+    </div>
+    
+    <div class="feature-item">
+      <div class="feature-icon">📖</div>
+      <div>
+        <strong>Quran & Hadith</strong>
+        <div style="font-size: 0.8rem; opacity: 0.7;">Cached inspiration available</div>
+      </div>
+    </div>
+    
+    <div class="feature-item">
+      <div class="feature-icon">📅</div>
+      <div>
+        <strong>Hijri Calendar</strong>
+        <div style="font-size: 0.8rem; opacity: 0.7;">Manual calculations work offline</div>
+      </div>
+    </div>
+  </div>
+  
+  <button class="retry-button" onclick="window.location.reload()">
+    🔄 Try Again
+  </button>
+  
+  <div class="cached-data">
+    <div class="cached-title">Cached Information</div>
+    <div class="last-sync" id="last-sync-time">
+      Last sync: Checking...
+    </div>
+  </div>
+</div>
+
+<script>
+// Display last sync time
+const lastSync = localStorage.getItem('lastPrayerSync');
+if (lastSync) {
+  const syncDate = new Date(lastSync);
+  const now = new Date();
+  const diffMs = now - syncDate;
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  
+  let timeText;
+  if (diffMins < 60) {
+    timeText = `${diffMins} minutes ago`;
+  } else if (diffMins < 1440) {
+    timeText = `${Math.floor(diffMins / 60)} hours ago`;
+  } else {
+    timeText = `${Math.floor(diffMins / 1440)} days ago`;
+  }
+  
+  document.getElementById('last-sync-time').textContent = `Last sync: ${timeText}`;
+}
+
+// Check for connection changes
+window.addEventListener('online', () => {
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+});
+
+// Auto-retry every 30 seconds
+setInterval(() => {
+  if (navigator.onLine) {
+    window.location.reload();
+  }
+}, 30000);
+</script>
+</body>
+</html>

@@ -27,6 +27,217 @@
 <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.1.2/moment-hijri.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hijri-date@1.0.4/lib/hijri-date.min.js"></script>
 <script src="islamic-calendar.js"></script>
+
+<!-- PWA Installation Script -->
+<script>
+// PWA Installation
+let deferredPrompt;
+const installButton = document.createElement('button');
+installButton.textContent = 'Install App';
+installButton.style.cssText = `
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: none;
+`;
+installButton.addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+        // Track installation
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'pwa_install', {
+            'event_category': 'engagement',
+            'event_label': 'install_accepted'
+          });
+        }
+      }
+      deferredPrompt = null;
+    });
+  }
+});
+
+document.body.appendChild(installButton);
+
+// Listen for install prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installButton.style.display = 'block';
+});
+
+// Hide install button after successful installation
+window.addEventListener('appinstalled', () => {
+  installButton.style.display = 'none';
+  console.log('PWA was installed');
+  
+  // Show success notification
+  if ('Notification' in window && Notification.permission === 'granted') {
+    new Notification('App Installed Successfully!', {
+      body: 'As-saat | Al-asr is now installed on your device',
+      icon: '/icons/icon-192.png',
+      badge: '/icons/launchericon-72x72.png'
+    });
+  }
+});
+
+// Register enhanced service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker-enhanced.js')
+      .then(registration => {
+        console.log('Enhanced Service Worker registered with scope:', registration.scope);
+        
+        // Check for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // Show update notification
+              showUpdateNotification();
+            }
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Enhanced Service Worker registration failed:', error);
+        
+        // Fallback to original service worker
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Fallback Service Worker registered');
+          })
+          .catch(error => {
+            console.error('Fallback Service Worker registration failed:', error);
+          });
+      });
+  });
+}
+
+// Update notification
+function showUpdateNotification() {
+  const updateDiv = document.createElement('div');
+  updateDiv.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      z-index: 1001;
+      max-width: 300px;
+    ">
+      <div style="font-weight: 600; margin-bottom: 8px;">🚀 App Update Available</div>
+      <div style="font-size: 14px; margin-bottom: 12px;">New features and improvements are ready!</div>
+      <button onclick="location.reload()" style="
+        background: white;
+        color: #059669;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+      ">Update Now</button>
+    </div>
+  `;
+  document.body.appendChild(updateDiv);
+  
+  // Auto-hide after 10 seconds
+  setTimeout(() => {
+    if (updateDiv.parentNode) {
+      updateDiv.parentNode.removeChild(updateDiv);
+    }
+  }, 10000);
+}
+
+// Handle shortcuts from manifest
+if ('launchQueue' in window) {
+  launchQueue.setConsumer((launchParams) => {
+    console.log('App launched with params:', launchParams);
+    if (launchParams.url && launchParams.url.includes('view=prayers')) {
+      // Navigate to prayer times view
+      setTimeout(() => {
+        document.querySelector('[data-section="prayer-times"]')?.click();
+      }, 1000);
+    } else if (launchParams.url && launchParams.url.includes('view=qibla')) {
+      // Navigate to Qibla compass
+      setTimeout(() => {
+        document.querySelector('[data-section="qibla"]')?.click();
+      }, 1000);
+    }
+  });
+}
+
+// Share target handling
+if ('share' in navigator) {
+  // Add share functionality to Islamic content
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#verse-of-day, #hadith-of-day')) {
+      const content = e.target.closest('#verse-of-day, #hadith-of-day').textContent.trim();
+      if (content && content.length > 0) {
+        navigator.share({
+          title: 'Islamic Inspiration - As-saat | Al-asr',
+          text: content,
+          url: window.location.href
+        }).catch(err => {
+          console.log('Share failed:', err);
+        });
+      }
+    }
+  });
+}
+
+// Network status monitoring
+function updateNetworkStatus() {
+  const isOnline = navigator.onLine;
+  const statusIndicator = document.createElement('div');
+  statusIndicator.id = 'network-status';
+  statusIndicator.style.cssText = `
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1002;
+    transition: all 0.3s ease;
+    ${isOnline ? 
+      'background: #10b981; color: white; display: none;' : 
+      'background: #ef4444; color: white;'
+    }
+  `;
+  statusIndicator.textContent = isOnline ? '🌐 Online' : '📵 Offline';
+  
+  // Remove existing indicator
+  const existing = document.getElementById('network-status');
+  if (existing) existing.remove();
+  
+  if (!isOnline) {
+    document.body.appendChild(statusIndicator);
+  }
+}
+
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
+updateNetworkStatus();
+</script>
 </head>
 
 <body>
